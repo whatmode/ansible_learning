@@ -1,0 +1,22 @@
+---
+# tasks file for roles/web_server
+- name: Update apt package cache
+  apt:
+    update_cache: yes
+
+- name: Install apache web server
+  apt:
+    name: apache2
+    state: present
+  notify: restart apache 
+
+- name: Install nano text editor
+  apt:
+     name: nano
+     state: present
+
+- name: Allow HTTP traffic (using variable)
+  ufw:
+     rule: allow
+     port: "{{ web_server_port }}"
+  notify: reload firewall

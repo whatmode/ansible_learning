@@ -1,0 +1,13 @@
+---
+- name: Deploy and Configure Web Server
+  hosts: local
+  become: true
+  
+  roles:
+    - web_server 
+    - firewall
+
+
+  
+  
+  

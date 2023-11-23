@@ -1,0 +1,17 @@
+---
+# roles/firewall/tasks/main.yml
+- name: Install ufw
+  apt:
+    name: ufw
+    state: present
+
+- name: Configure Firewall
+  become: true
+  ufw:
+    rule: allow
+    port: '{{ item }}'
+  with_items:
+    - '22'  # Allow SSH
+    - '80'  # Allow HTTP
+
+  notify: reload firewall
